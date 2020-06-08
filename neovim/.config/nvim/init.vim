@@ -31,6 +31,9 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
+" toggle hlsearch using <leader>h
+nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
+
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
