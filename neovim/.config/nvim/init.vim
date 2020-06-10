@@ -37,6 +37,12 @@ nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
+" show complete menu automatically
+Plug 'skywind3000/vim-auto-popmenu'
+
+" dictionary database plugin for many languages
+Plug 'skywind3000/vim-dict'
+
 " create your own text objects without pain
 Plug 'kana/vim-textobj-user'
     " reprensent whole textobject using ae or ie
@@ -74,3 +80,15 @@ colorscheme dracula
 
 " prefix for camelcase motion
 let g:camelcasemotion_key = '<leader>'
+
+" enable this plugin for filetypes, '*' for all files.
+let g:apc_enable_ft = {'*': 1}
+
+" source for dictionary, current or other loaded buffers, see ':help cpt'
+set cpt=.,k,w,b
+
+" don't select the first item.
+set completeopt=menu,menuone,noselect
+
+" suppress annoy messages.
+set shortmess+=c
