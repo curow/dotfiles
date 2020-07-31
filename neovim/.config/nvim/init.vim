@@ -6,6 +6,9 @@ filetype on
 filetype plugin on
 filetype indent on
 
+" enable mouse in every mode
+set mouse=a
+
 " syntax highlighting
 syntax on
 
