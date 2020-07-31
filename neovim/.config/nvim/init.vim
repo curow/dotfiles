@@ -78,6 +78,9 @@ Plug 'easymotion/vim-easymotion'
 " provide CamelCase and under_score motion
 Plug 'bkad/camelcasemotion'
 
+" provide rainbow parentheses
+Plug 'luochen1990/rainbow'
+
 " Initialize plugin system
 call plug#end()
 
@@ -89,6 +92,9 @@ let g:camelcasemotion_key = '<leader>'
 
 " enable this plugin for filetypes, '*' for all files.
 let g:apc_enable_ft = {'*': 1}
+
+"set to 0 if you want to enable it later via :RainbowToggle
+let g:rainbow_active = 1 
 
 " source for dictionary, current or other loaded buffers, see ':help cpt'
 set cpt=.,k,w,b
