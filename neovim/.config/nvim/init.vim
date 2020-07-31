@@ -40,6 +40,10 @@ nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."
 " use gui color
 set termguicolors
 
+" netrw config
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
@@ -94,6 +98,8 @@ function! g:BuffetSetCustomColors() " set color for vim-buffet
     highlight! BuffetTab guibg=#282a36 guifg=#f8f8f2
 endfunction
 Plug 'bagrat/vim-buffet'
+
+Plug 'tpope/vim-vinegar'
 
 " Initialize plugin system
 call plug#end()
