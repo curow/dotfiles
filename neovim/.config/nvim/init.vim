@@ -40,6 +40,9 @@ nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
+" use git inside vim
+Plug 'tpope/vim-fugitive'
+
 " show complete menu automatically
 Plug 'skywind3000/vim-auto-popmenu'
 
