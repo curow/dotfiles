@@ -41,6 +41,12 @@ nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."
 " use gui color
 set termguicolors
 
+" jump between files without save changes
+set hidden
+
+" edit vimrc using <Leade>v
+nnoremap <Leader>v :e $MYVIMRC<cr>
+
 " netrw config
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
