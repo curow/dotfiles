@@ -13,8 +13,9 @@ syntax on
 set number
 set relativenumber
 
-" highlight the line on which cursor is
+" highlight the line and column on which cursor is
 set cursorline
+set cursorcolumn
 
 " set indentation
 set tabstop=4
