@@ -13,6 +13,9 @@ syntax on
 set number
 set relativenumber
 
+" highlight the line on which cursor is
+set cursorline
+
 " set indentation
 set tabstop=4
 set shiftwidth=4
@@ -34,8 +37,14 @@ vnoremap <leader>P "+P
 " toggle hlsearch using <leader>h
 nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
+" use gui color
+set termguicolors
+
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
+
+" use git inside vim
+Plug 'tpope/vim-fugitive'
 
 " show complete menu automatically
 Plug 'skywind3000/vim-auto-popmenu'
@@ -72,6 +81,20 @@ Plug 'easymotion/vim-easymotion'
 " provide CamelCase and under_score motion
 Plug 'bkad/camelcasemotion'
 
+" provide rainbow parentheses
+Plug 'luochen1990/rainbow'
+
+" provide icons for files
+Plug 'ryanoasis/vim-devicons'
+
+" provide tabline at the top
+function! g:BuffetSetCustomColors() " set color for vim-buffet
+    highlight! BuffetCurrentBuffer guibg=#282a36 guifg=#bd93f9
+    highlight! BuffetBuffer guibg=#282a36 guifg=#f8f8f2
+    highlight! BuffetTab guibg=#282a36 guifg=#f8f8f2
+endfunction
+Plug 'bagrat/vim-buffet'
+
 " Initialize plugin system
 call plug#end()
 
@@ -84,6 +107,9 @@ let g:camelcasemotion_key = '<leader>'
 " enable this plugin for filetypes, '*' for all files.
 let g:apc_enable_ft = {'*': 1}
 
+"set to 0 if you want to enable it later via :RainbowToggle
+let g:rainbow_active = 1 
+
 " source for dictionary, current or other loaded buffers, see ':help cpt'
 set cpt=.,k,w,b
 
@@ -92,3 +118,25 @@ set completeopt=menu,menuone,noselect
 
 " suppress annoy messages.
 set shortmess+=c
+
+" config tablines
+nmap <leader>1 <Plug>BuffetSwitch(1)
+nmap <leader>2 <Plug>BuffetSwitch(2)
+nmap <leader>3 <Plug>BuffetSwitch(3)
+nmap <leader>4 <Plug>BuffetSwitch(4)
+nmap <leader>5 <Plug>BuffetSwitch(5)
+nmap <leader>6 <Plug>BuffetSwitch(6)
+nmap <leader>7 <Plug>BuffetSwitch(7)
+nmap <leader>8 <Plug>BuffetSwitch(8)
+nmap <leader>9 <Plug>BuffetSwitch(9)
+nmap <leader>0 <Plug>BuffetSwitch(10)
+noremap <Tab> :bn<CR>
+noremap <S-Tab> :bp<CR>
+noremap <Leader><Tab> :Bw<CR>
+noremap <Leader><S-Tab> :Bw!<CR>
+noremap <C-t> :tabnew split<CR>
+let g:buffet_show_index = 1
+let g:buffet_powerline_separators = 0
+let g:buffet_tab_icon = "\uf00a"
+let g:buffet_left_trunc_icon = "\uf0a8"
+let g:buffet_right_trunc_icon = "\uf0a9"
