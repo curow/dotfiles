@@ -107,8 +107,15 @@ call plug#end()
 " set theme as dracula (dracular/vim plugin need to be installed)
 colorscheme dracula
 
-" prefix for camelcase motion
-let g:camelcasemotion_key = '<leader>'
+" map w, b, e, ge for camelcase motion
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
 
 " enable this plugin for filetypes, '*' for all files.
 let g:apc_enable_ft = {'*': 1}
@@ -146,3 +153,6 @@ let g:buffet_powerline_separators = 0
 let g:buffet_tab_icon = "\uf00a"
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
+
+" easy motion trigger with one leader
+map <Leader> <Plug>(easymotion-prefix)
