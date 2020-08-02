@@ -166,3 +166,6 @@ let g:buffet_right_trunc_icon = "\uf0a9"
 
 " easy motion trigger with one leader
 map <Leader> <Plug>(easymotion-prefix)
+
+" source current file using <C-s>
+noremap <C-s> :source%<CR>
