@@ -12,9 +12,8 @@ set mouse=a
 " syntax highlighting
 syntax on
 
-" show relative numberlines
+" show numberlines
 set number
-set relativenumber
 
 " highlight the line and column on which cursor is
 set cursorline
@@ -109,6 +108,7 @@ function! g:BuffetSetCustomColors() " set color for vim-buffet
 endfunction
 Plug 'bagrat/vim-buffet'
 
+" use - to go to the upper dir
 Plug 'tpope/vim-vinegar'
 
 " Initialize plugin system
@@ -117,15 +117,9 @@ call plug#end()
 " set theme as dracula (dracular/vim plugin need to be installed)
 colorscheme dracula
 
-" map w, b, e, ge for camelcase motion
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> ge <Plug>CamelCaseMotion_ge
-sunmap w
-sunmap b
-sunmap e
-sunmap ge
+"camelcase motion trigger
+let g:camelcasemotion_key = '<leader>'
+
 
 " enable this plugin for filetypes, '*' for all files.
 let g:apc_enable_ft = {'*': 1}
@@ -134,7 +128,7 @@ let g:apc_enable_ft = {'*': 1}
 let g:rainbow_active = 1 
 
 " source for dictionary, current or other loaded buffers, see ':help cpt'
-set cpt=.,k,w,b
+set complete=.,k,w,b
 
 " don't select the first item.
 set completeopt=menu,menuone,noselect
@@ -164,8 +158,19 @@ let g:buffet_tab_icon = "\uf00a"
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
 
-" easy motion trigger with one leader
-map <Leader> <Plug>(easymotion-prefix)
+" easy motion config
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" Jump to anywhere you want with minimal keystrokes, with just two key binding.
+" `s{char}{char}{label}`
+nmap s <Plug>(easymotion-overwin-f2)
+" enhance t in operator mode
+omap t <Plug>(easymotion-bd-tl)
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
 
 " source current file using <C-s>
 noremap <C-s> :source%<CR>
