@@ -173,7 +173,19 @@ map <Leader>k <Plug>(easymotion-k)
 
 
 " source current file using <C-s>
-noremap <C-s> :source%<CR>
+noremap <C-S> :source%<CR>
 
 " save current file
 nnoremap <Leader><Leader> :w<CR>
+
+" change word before cursor to uppercase
+noremap <C-F> <Esc>gUiw`]a
+
+" Move around splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+" If a file is changed outside of vim, automatically reload it without asking
+set autoread
