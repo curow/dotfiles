@@ -7,7 +7,7 @@ filetype plugin on
 filetype indent on
 
 " enable mouse in insert mode
-set mouse=i
+set mouse=a
 
 " syntax highlighting
 syntax on
@@ -162,9 +162,9 @@ let g:buffet_right_trunc_icon = "\uf0a9"
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " Jump to anywhere you want with minimal keystrokes, with just two key binding.
 " `s{char}{char}{label}`
-nmap s <Plug>(easymotion-overwin-f2)
+nmap <Leader>s <Plug>(easymotion-overwin-f2)
 " enhance t in operator mode
-omap t <Plug>(easymotion-bd-tl)
+omap <Leader>t <Plug>(easymotion-bd-tl)
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
@@ -174,3 +174,6 @@ map <Leader>k <Plug>(easymotion-k)
 
 " source current file using <C-s>
 noremap <C-s> :source%<CR>
+
+" save current file
+nnoremap <Leader><Leader> :w<CR>
