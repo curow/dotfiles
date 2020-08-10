@@ -178,8 +178,12 @@ noremap <C-S> :source%<CR>
 " save current file
 nnoremap <Leader><Leader> :w<CR>
 
-" change word before cursor to uppercase
-noremap <C-F> <Esc>gUiw`]a
+" change word under cursor to uppercase, works in insert mode
+noremap! <C-F> <Esc>gUiw`]a
+
+" change words to uppercase, works in normal mode
+nnoremap <Leader>U <Esc>gUiw
+
 
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
