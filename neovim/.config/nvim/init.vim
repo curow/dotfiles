@@ -23,7 +23,9 @@ set cursorcolumn
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set autoindent
+
+" make input # less irratating
+inoremap # X#<left><backspace><right>
 
 " Copy to clipboard
 vnoremap  <leader>y  "+y
