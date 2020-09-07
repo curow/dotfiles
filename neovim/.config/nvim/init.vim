@@ -43,6 +43,9 @@ set hidden
 " edit vimrc using <Leade>v
 nnoremap <Leader>v :e $MYVIMRC<cr>
 
+" edit zshrc using <Leader>z
+nnoremap <Leader>z :e ~/.zshrc<cr>
+
 " netrw config
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
