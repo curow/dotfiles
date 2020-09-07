@@ -5,6 +5,7 @@ let mapleader=","
 filetype on
 filetype plugin on
 filetype indent on
+filetype plugin indent on
 
 " enable mouse in insert mode
 set mouse=a
@@ -195,3 +196,8 @@ nnoremap <c-l> <c-w>l
 
 " If a file is changed outside of vim, automatically reload it without asking
 set autoread
+
+" see https://www.systutorials.com/how-to-make-vim-indent-c11-lambdas-correctly/
+" Try to fix vim crazy indentation inside lambda function of c++
+setlocal cindent
+setlocal cino=j1,(0,ws,Ws
