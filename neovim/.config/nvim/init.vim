@@ -2,9 +2,6 @@
 let mapleader=","
 
 " file type recognition
-filetype on
-filetype plugin on
-filetype indent on
 filetype plugin indent on
 
 " enable mouse in insert mode
