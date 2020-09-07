@@ -1,14 +1,8 @@
 " change the leader key from "\" to ","
 let mapleader=","
 
-" file type recognition
-filetype plugin indent on
-
 " enable mouse in insert mode
 set mouse=a
-
-" syntax highlighting
-syntax on
 
 " show numberlines
 set number
@@ -125,7 +119,7 @@ let g:camelcasemotion_key = '<leader>'
 let g:apc_enable_ft = {'*': 1}
 
 "set to 0 if you want to enable it later via :RainbowToggle
-let g:rainbow_active = 1 
+let g:rainbow_active = 0 
 
 " source for dictionary, current or other loaded buffers, see ':help cpt'
 set complete=.,k,w,b
@@ -198,3 +192,7 @@ set autoread
 " Try to fix vim crazy indentation inside lambda function of c++
 setlocal cindent
 setlocal cino=j1,(0,ws,Ws
+
+" file type recognition and sytax highlight
+filetype plugin indent on
+syntax on
