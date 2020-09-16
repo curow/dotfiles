@@ -112,6 +112,9 @@ Plug 'tpope/vim-vinegar'
 " just for mac, automatically switch to english when in normal
 Plug 'ybian/smartim'
 
+" asyncrun shell command
+Plug 'skywind3000/asyncrun.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -168,7 +171,7 @@ let g:buffet_right_trunc_icon = "\uf0a9"
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " Jump to anywhere you want with minimal keystrokes, with just two key binding.
 " `s{char}{char}{label}`
-nmap <Leader>s <Plug>(easymotion-overwin-f2)
+nmap <Leader>f <Plug>(easymotion-overwin-f2)
 " enhance t in operator mode
 omap <Leader>t <Plug>(easymotion-bd-tl)
 " Turn on case-insensitive feature
@@ -179,7 +182,7 @@ map <Leader>k <Plug>(easymotion-k)
 
 
 " source current file using <C-s>
-noremap <C-S> :source%<CR>
+noremap <Leader>s :source%<CR>
 
 " save current file
 nnoremap <Leader><Leader> :w<CR>
@@ -208,3 +211,9 @@ setlocal cino=j1,(0,ws,Ws
 " file type recognition and sytax highlight
 filetype plugin indent on
 syntax on
+
+" c++ support for competitive programming
+nnoremap <silent> <Leader>c :AsyncRun -mode=term -pos=bottom -rows=10 -focus=0
+    \ g++-10 -std=c++17 -O3 -Wall -DDEBUG -DTIMING %; ./a.out; cat output.txt <CR>
+nnoremap <silent> <Leader>r :AsyncRun -mode=term -pos=bottom -rows=10 -focus=0
+    \ ./a.out; cat output.txt <CR>
