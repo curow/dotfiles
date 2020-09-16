@@ -128,6 +128,9 @@ let g:apc_enable_ft = {'*': 1}
 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 0 
 
+" dictionary path
+set dictionary+=/usr/share/dict/words
+
 " source for dictionary, current or other loaded buffers, see ':help cpt'
 set complete=.,k,w,b
 
