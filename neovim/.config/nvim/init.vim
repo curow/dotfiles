@@ -60,7 +60,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'skywind3000/vim-auto-popmenu'
 
 " dictionary database plugin for many languages
-Plug 'skywind3000/vim-dict'
+" Plug 'skywind3000/vim-dict'
+Plug 'asins/vim-dict'
 
 " create your own text objects without pain
 Plug 'kana/vim-textobj-user'
@@ -107,6 +108,9 @@ Plug 'bagrat/vim-buffet'
 
 " use - to go to the upper dir
 Plug 'tpope/vim-vinegar'
+
+" just for mac, automatically switch to english when in normal
+Plug 'ybian/smartim'
 
 " Initialize plugin system
 call plug#end()
