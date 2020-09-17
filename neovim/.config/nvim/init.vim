@@ -115,6 +115,12 @@ Plug 'ybian/smartim'
 " asyncrun shell command
 Plug 'skywind3000/asyncrun.vim'
 
+" snippet engine
+Plug 'SirVer/ultisnips'
+
+" comman snippets
+Plug 'honza/vim-snippets'
+
 " Initialize plugin system
 call plug#end()
 
