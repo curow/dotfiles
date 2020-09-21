@@ -115,11 +115,11 @@ Plug 'ybian/smartim'
 " asyncrun shell command
 Plug 'skywind3000/asyncrun.vim'
 
-" snippet engine
-Plug 'SirVer/ultisnips'
+" " snippet engine
+" Plug 'SirVer/ultisnips'
 
-" comman snippets
-Plug 'honza/vim-snippets'
+" " comman snippets
+" Plug 'honza/vim-snippets'
 
 " vim for matlab
 function! DoRemote(arg)
@@ -205,21 +205,6 @@ noremap! <C-F> <Esc>gUiw`]a
 
 " change words to uppercase, works in normal mode
 nnoremap <Leader>U <Esc>gUiw
-
-
-" Move around windows using 'ALT + {h, j, k, l}' in any mode
-tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-j> <C-\><C-N><C-w>j
-tnoremap <A-k> <C-\><C-N><C-w>k
-tnoremap <A-l> <C-\><C-N><C-w>l
-inoremap <A-h> <C-\><C-N><C-w>h
-inoremap <A-j> <C-\><C-N><C-w>j
-inoremap <A-k> <C-\><C-N><C-w>k
-inoremap <A-l> <C-\><C-N><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
 
 " If a file is changed outside of vim, automatically reload it without asking
 set autoread
