@@ -8,8 +8,8 @@ set mouse=a
 set number
 
 " highlight the line and column on which cursor is
-set cursorline
-set cursorcolumn
+" set cursorline
+" set cursorcolumn
 
 " set indentation
 set tabstop=4
@@ -20,19 +20,19 @@ set expandtab
 inoremap # X#<left><backspace><right>
 
 " Copy to clipboard
-vnoremap  <leader>y  "+y
-nnoremap  <leader>Y  "+yg_
-nnoremap  <leader>y  "+y
-nnoremap  <leader>yy  "+yy
+vnoremap  <Leader>y  "+y
+nnoremap  <Leader>Y  "+yg_
+nnoremap  <Leader>y  "+y
+nnoremap  <Leader>yy  "+yy
 
 " Paste from clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
 
-" toggle hlsearch using <leader>h
-nnoremap <silent><expr> <leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
+" toggle hlsearch using <Leader>h
+nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
 " use gui color
 set termguicolors
@@ -121,6 +121,13 @@ Plug 'SirVer/ultisnips'
 " comman snippets
 Plug 'honza/vim-snippets'
 
+" vim for matlab
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+
+Plug 'daeyun/vim-matlab', { 'do': function('DoRemote') }
+
 " Initialize plugin system
 call plug#end()
 
@@ -128,7 +135,7 @@ call plug#end()
 colorscheme dracula
 
 "camelcase motion trigger
-let g:camelcasemotion_key = '<leader>'
+let g:camelcasemotion_key = '<Leader><Leader>'
 
 
 " enable this plugin for filetypes, '*' for all files.
@@ -150,16 +157,16 @@ set completeopt=menu,menuone,noselect
 set shortmess+=c
 
 " config tablines
-nmap <leader>1 <Plug>BuffetSwitch(1)
-nmap <leader>2 <Plug>BuffetSwitch(2)
-nmap <leader>3 <Plug>BuffetSwitch(3)
-nmap <leader>4 <Plug>BuffetSwitch(4)
-nmap <leader>5 <Plug>BuffetSwitch(5)
-nmap <leader>6 <Plug>BuffetSwitch(6)
-nmap <leader>7 <Plug>BuffetSwitch(7)
-nmap <leader>8 <Plug>BuffetSwitch(8)
-nmap <leader>9 <Plug>BuffetSwitch(9)
-nmap <leader>0 <Plug>BuffetSwitch(10)
+nmap <Leader>1 <Plug>BuffetSwitch(1)
+nmap <Leader>2 <Plug>BuffetSwitch(2)
+nmap <Leader>3 <Plug>BuffetSwitch(3)
+nmap <Leader>4 <Plug>BuffetSwitch(4)
+nmap <Leader>5 <Plug>BuffetSwitch(5)
+nmap <Leader>6 <Plug>BuffetSwitch(6)
+nmap <Leader>7 <Plug>BuffetSwitch(7)
+nmap <Leader>8 <Plug>BuffetSwitch(8)
+nmap <Leader>9 <Plug>BuffetSwitch(9)
+nmap <Leader>0 <Plug>BuffetSwitch(10)
 noremap <Tab> :bn<CR>
 noremap <S-Tab> :bp<CR>
 noremap <Leader><Tab> :Bw<CR>
@@ -188,10 +195,10 @@ map <Leader>k <Plug>(easymotion-k)
 
 
 " source current file using <C-s>
-noremap <Leader>s :source%<CR>
+noremap <Leader>so :source%<CR>
 
 " save current file
-nnoremap <Leader><Leader> :w<CR>
+nnoremap <Leader>w :w<CR>
 
 " change word under cursor to uppercase, works in insert mode
 noremap! <C-F> <Esc>gUiw`]a
@@ -200,11 +207,19 @@ noremap! <C-F> <Esc>gUiw`]a
 nnoremap <Leader>U <Esc>gUiw
 
 
-" Move around splits with <c-hjkl>
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+" Move around windows using 'ALT + {h, j, k, l}' in any mode
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 " If a file is changed outside of vim, automatically reload it without asking
 set autoread
@@ -223,3 +238,29 @@ nnoremap <silent> <Leader>c :AsyncRun -mode=term -pos=bottom -rows=10 -focus=0
     \ g++-10 -std=c++17 -O3 -Wall -DDEBUG -DTIMING %; ./a.out; cat output.txt <CR>
 nnoremap <silent> <Leader>r :AsyncRun -mode=term -pos=bottom -rows=10 -focus=0
     \ ./a.out; cat output.txt <CR>
+
+" vim-matlab settings
+let g:matlab_auto_mappings = 0 "automatic mappings disabled
+let g:matlab_server_launcher = 'vim'  "launch the server in a Neovim terminal buffer
+let g:matlab_server_split = 'horizontal'   "launch the server in a vertical split
+nnoremap <buffer><silent> <Leader><Leader>m :MatlabLaunchServer<CR>
+nnoremap <buffer><silent> <Leader><Leader>r :MatlabCliRunCell<CR>
+nnoremap <buffer><silent> <CR> :MatlabCliRunCell<CR>
+nnoremap <buffer><silent> <Leader><Leader>s :MatlabCliRunSelection<CR>
+nnoremap <buffer><silent> <Leader><Leader>c :MatlabCliCancel<CR>
+nnoremap <buffer><silent> <Leader><Leader>e :MatlabCliOpenInMatlabEditor<CR>
+nnoremap <buffer><silent> <Leader><Leader>h :MatlabCliHelp<CR>
+nnoremap <buffer><silent> <Leader><Leader>l :MatlabNormalModeCreateCell<CR>
+vnoremap <buffer><silent> <Leader><Leader>l :<C-u>MatlabVisualModeCreateCell<CR>
+inoremap <buffer><silent> <Leader><Leader>l <C-o>:MatlabInsertModeCreateCell<CR>
+nnoremap <buffer><silent> <Leader><Leader>i <ESC>:MatlabCliViewVarUnderCursor<CR>
+vnoremap <buffer><silent> <Leader><Leader>i <ESC>:MatlabCliViewSelectedVar<CR>
+
+" return normal mode from terminal mode using <Esc>
+tnoremap <Esc> <C-\><C-n>
+
+" quit all
+nnoremap <Leader>q :qa<CR>
+
+" new horizaontal splits are on the bottom
+set splitbelow
