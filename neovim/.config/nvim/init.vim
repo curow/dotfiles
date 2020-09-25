@@ -16,6 +16,16 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" give more space for displaying messages
+set cmdheight=2
+
+" having longer updatetime (default is 4000 ms = 4 s) leads
+" to noticeable delays and poor user experience.
+set updatetime=300
+
+" don't pass messages to |ins-completion-menu|
+set shortmess+=c
+
 " make input # less irratating
 inoremap # X#<left><backspace><right>
 
@@ -59,8 +69,20 @@ Plug 'tpope/vim-fugitive'
 " show complete menu automatically
 Plug 'skywind3000/vim-auto-popmenu'
 
+" enable auto popmenu for filetypes, '*' for all files.
+let g:apc_enable_ft = {'*': 1}
+let g:apc_min_length = 3
+
+" dictionary path
+set dictionary+=/usr/share/dict/words
+
+" source for dictionary, current or other loaded buffers, see ':help cpt'
+set complete=.,k,w,b
+
+" don't select the first item.
+set completeopt=menu,menuone,noselect
+
 " dictionary database plugin for many languages
-" Plug 'skywind3000/vim-dict'
 Plug 'asins/vim-dict'
 
 " create your own text objects without pain
@@ -83,78 +105,43 @@ Plug 'vim-airline/vim-airline'
 " nice theme
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+
 " Insert or delete brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
 
 " press one key to jump directly to the target
 Plug 'easymotion/vim-easymotion'
 
+" easy motion config
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" Jump to anywhere you want with minimal keystrokes, with just two key binding.
+" `s{char}{char}{label}`
+nmap <Leader>f <Plug>(easymotion-overwin-f2)
+" enhance t in operator mode
+omap <Leader>t <Plug>(easymotion-bd-tl)
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
 " provide CamelCase and under_score motion
 Plug 'bkad/camelcasemotion'
 
-" provide rainbow parentheses
-Plug 'luochen1990/rainbow'
+"camelcase motion trigger
+let g:camelcasemotion_key = '<Leader>'
 
 " provide icons for files
 Plug 'ryanoasis/vim-devicons'
 
-" provide tabline at the top
+" provide tabline at the top, this function must be
+" defined before vim-buffet plugin
 function! g:BuffetSetCustomColors() " set color for vim-buffet
     highlight! BuffetCurrentBuffer guibg=#282a36 guifg=#bd93f9
     highlight! BuffetBuffer guibg=#282a36 guifg=#f8f8f2
     highlight! BuffetTab guibg=#282a36 guifg=#f8f8f2
 endfunction
 Plug 'bagrat/vim-buffet'
-
-" use - to go to the upper dir
-Plug 'tpope/vim-vinegar'
-
-" just for mac, automatically switch to english when in normal
-Plug 'ybian/smartim'
-
-" asyncrun shell command
-Plug 'skywind3000/asyncrun.vim'
-
-" " snippet engine
-" Plug 'SirVer/ultisnips'
-
-" " comman snippets
-" Plug 'honza/vim-snippets'
-
-" vim for matlab
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-
-Plug 'daeyun/vim-matlab', { 'do': function('DoRemote') }
-
-" Initialize plugin system
-call plug#end()
-
-" set theme as dracula (dracular/vim plugin need to be installed)
-colorscheme dracula
-
-"camelcase motion trigger
-let g:camelcasemotion_key = '<Leader><Leader>'
-
-
-" enable this plugin for filetypes, '*' for all files.
-let g:apc_enable_ft = {'*': 1}
-
-"set to 0 if you want to enable it later via :RainbowToggle
-let g:rainbow_active = 0 
-
-" dictionary path
-set dictionary+=/usr/share/dict/words
-
-" source for dictionary, current or other loaded buffers, see ':help cpt'
-set complete=.,k,w,b
-
-" don't select the first item.
-set completeopt=menu,menuone,noselect
-
-" suppress annoy messages.
-set shortmess+=c
 
 " config tablines
 nmap <Leader>1 <Plug>BuffetSwitch(1)
@@ -172,33 +159,82 @@ noremap <S-Tab> :bp<CR>
 noremap <Leader><Tab> :Bw<CR>
 noremap <Leader><S-Tab> :Bw!<CR>
 noremap <Leader>d :bd<CR>
-
-noremap <C-t> :tabnew split<CR>
 let g:buffet_show_index = 1
 let g:buffet_powerline_separators = 0
 let g:buffet_tab_icon = "\uf00a"
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
 
-" easy motion config
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" Jump to anywhere you want with minimal keystrokes, with just two key binding.
-" `s{char}{char}{label}`
-nmap <Leader>f <Plug>(easymotion-overwin-f2)
-" enhance t in operator mode
-omap <Leader>t <Plug>(easymotion-bd-tl)
-" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+" use - to go to the upper dir
+Plug 'tpope/vim-vinegar'
 
+" asyncrun shell command
+Plug 'skywind3000/asyncrun.vim'
+
+" c++ additional syntax highlighting
+Plug 'octol/vim-cpp-enhanced-highlight'
+
+" cpp highlight setup
+let c_no_curly_error=1
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_posix_standard = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+
+" c++ clang format
+Plug 'rhysd/vim-clang-format'
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,cc,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,cc,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+
+" code auto completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
+
+" highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" get terminal easily
+Plug 'vimlab/split-term.vim'
+noremap <Leader>t :Term<CR>
+
+" Initialize plugin system
+call plug#end()
+
+" set theme as dracula (dracular/vim plugin need to be installed)
+colorscheme dracula
+
+" file type recognition and sytax highlight
+filetype plugin indent on
+syntax on
 
 " source current file using <C-s>
 noremap <Leader>so :source%<CR>
 
 " save current file
-nnoremap <Leader>w :w<CR>
+nnoremap <Leader><Leader> :w<CR>
 
 " change word under cursor to uppercase, works in insert mode
 noremap! <C-F> <Esc>gUiw`]a
@@ -209,37 +245,19 @@ nnoremap <Leader>U <Esc>gUiw
 " If a file is changed outside of vim, automatically reload it without asking
 set autoread
 
-" see https://www.systutorials.com/how-to-make-vim-indent-c11-lambdas-correctly/
-" Try to fix vim crazy indentation inside lambda function of c++
-setlocal cindent
-setlocal cino=j1,(0,ws,Ws
-
-" file type recognition and sytax highlight
-filetype plugin indent on
-syntax on
-
 " c++ support for competitive programming
 nnoremap <silent> <Leader>c :AsyncRun -mode=term -pos=bottom -rows=10 -focus=0
     \ g++-10 -std=c++17 -O3 -Wall -DDEBUG -DTIMING %; ./a.out; cat output.txt <CR>
 nnoremap <silent> <Leader>r :AsyncRun -mode=term -pos=bottom -rows=10 -focus=0
     \ ./a.out; cat output.txt <CR>
 
-" vim-matlab settings
-let g:matlab_auto_mappings = 0 "automatic mappings disabled
-let g:matlab_server_launcher = 'vim'  "launch the server in a Neovim terminal buffer
-let g:matlab_server_split = 'horizontal'   "launch the server in a vertical split
-nnoremap <buffer><silent> <Leader><Leader>m :MatlabLaunchServer<CR>
-nnoremap <buffer><silent> <Leader><Leader>r :MatlabCliRunCell<CR>
-nnoremap <buffer><silent> <CR> :MatlabCliRunCell<CR>
-nnoremap <buffer><silent> <Leader><Leader>s :MatlabCliRunSelection<CR>
-nnoremap <buffer><silent> <Leader><Leader>c :MatlabCliCancel<CR>
-nnoremap <buffer><silent> <Leader><Leader>e :MatlabCliOpenInMatlabEditor<CR>
-nnoremap <buffer><silent> <Leader><Leader>h :MatlabCliHelp<CR>
-nnoremap <buffer><silent> <Leader><Leader>l :MatlabNormalModeCreateCell<CR>
-vnoremap <buffer><silent> <Leader><Leader>l :<C-u>MatlabVisualModeCreateCell<CR>
-inoremap <buffer><silent> <Leader><Leader>l <C-o>:MatlabInsertModeCreateCell<CR>
-nnoremap <buffer><silent> <Leader><Leader>i <ESC>:MatlabCliViewVarUnderCursor<CR>
-vnoremap <buffer><silent> <Leader><Leader>i <ESC>:MatlabCliViewSelectedVar<CR>
+" c++ for modern c++ course set up
+nnoremap <silent> <Leader>sc :AsyncRun -mode=term -pos=bottom -rows=10 -focus=0
+    \ clang++ -std=c++17 %; ./a.out <CR>
+
+" goto header, works in mac
+set path+=/usr/local/include/c++/10.2.0/
+nnoremap <expr> gh expand('<cWORD>') == '#include' ? 'Wgf' : 'gf'
 
 " return normal mode from terminal mode using <Esc>
 tnoremap <Esc> <C-\><C-n>
@@ -249,3 +267,12 @@ nnoremap <Leader>q :qa<CR>
 
 " new horizaontal splits are on the bottom
 set splitbelow
+
+" always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
