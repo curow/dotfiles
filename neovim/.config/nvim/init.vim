@@ -279,3 +279,8 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+" see https://www.systutorials.com/how-to-make-vim-indent-c11-lambdas-correctly/
+" Try to fix vim crazy indentation inside lambda function of c++
+setlocal cindent
+setlocal cino=j1,(0,ws,Ws
