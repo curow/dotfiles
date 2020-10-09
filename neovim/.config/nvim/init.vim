@@ -74,7 +74,7 @@ let g:apc_enable_ft = {'*': 1}
 let g:apc_min_length = 3
 
 " dictionary path
-set dictionary+=/usr/share/dict/words
+" set dictionary+=/usr/share/dict/words
 
 " source for dictionary, current or other loaded buffers, see ':help cpt'
 set complete=.,k,w,b
@@ -246,14 +246,17 @@ nnoremap <Leader>U <Esc>gUiw
 set autoread
 
 " c++ support for competitive programming
+" see https://usaco-guide.netlify.app/intro/running-code
+" to see why & fg is needed, in short, it makes mac display
+" program crash messages
 nnoremap <silent> <Leader>c :AsyncRun -mode=term -pos=bottom -rows=10 -focus=0
-    \ g++-10 -std=c++17 -O3 -Wall -DDEBUG -DTIMING %; ./a.out; cat output.txt <CR>
+    \ g++-10 -std=c++17 -O2 -Wall -DDEBUG -DTIMING % && ./a.out && cat output.txt <CR>
 nnoremap <silent> <Leader>r :AsyncRun -mode=term -pos=bottom -rows=10 -focus=0
-    \ ./a.out; cat output.txt <CR>
+    \ ./a.out && cat output.txt <CR>
 
 " c++ for modern c++ course set up
 nnoremap <silent> <Leader>sc :AsyncRun -mode=term -pos=bottom -rows=10 -focus=0
-    \ clang++ -std=c++17 %; ./a.out <CR>
+    \ clang++ -std=c++17 -O2 % && ./a.out <CR>
 
 " goto header, works in mac
 set path+=/usr/local/include/c++/10.2.0/
